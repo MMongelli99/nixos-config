@@ -98,12 +98,15 @@
   nixpkgs.config.permittedInsecurePackages = [
     # Obsidian needs this in order to work for some reason 
     "electron-25.9.0"
+    # Balena Etcher needs this for some reason
+    "electron-19.1.9"
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    chromium
+    # chromium
+    google-chrome
     neovim
     fira-code-nerdfont
     zsh-powerlevel10k
@@ -113,6 +116,9 @@
     gleam
     erlang
     git
+    virtualbox
+    etcher
+    trash-cli
     # wget
   ];
 
