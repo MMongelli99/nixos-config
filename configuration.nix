@@ -11,9 +11,8 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -46,9 +45,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the Cinnamon Desktop Environment.
+  # Enable the Budgie Desktop environment.
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.desktopManager.budgie.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -60,7 +59,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -90,57 +88,17 @@
   };
 
   # Install firefox.
-  # programs.firefox.enable = true;
+  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
-  nixpkgs.config.permittedInsecurePackages = [
-    # Obsidian needs this in order to work for some reason 
-    "electron-25.9.0"
-    # Balena Etcher needs this for some reason
-    "electron-19.1.9"
-  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # chromium
-    google-chrome
-    neovim
-    fira-code-nerdfont
-    zsh-powerlevel10k
-    neofetch
-    spotify
-    obsidian
-    gleam
-    erlang
-    git
-    virtualbox
-    etcher
-    trash-cli
-    # wget
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
   ];
-
-  ### still trying to get p10k to work ###
-  
-  programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-
-  #programs.zsh = {
-  #  enable  = true;
-  #  plugins = [
-  #    {
-  #      name = "powerlevel10k";
-  #      src  = pkgs.zsh-powerlevel10k;
-  #      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  #    }
-  #    {
-  #      name = "powerlevel10k-config";
-  #      src  = ./p10k-config;
-  #      file = "p10k-zsh";
-  #    }
-  #  ];
-  #};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -153,7 +111,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -167,6 +125,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
