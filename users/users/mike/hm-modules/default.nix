@@ -7,6 +7,7 @@
     ./fzf.nix
     ./kitty.nix
     ./neovim
+    ./tmux.nix
     ./firefox.nix
   ];
 }
