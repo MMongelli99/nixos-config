@@ -11,7 +11,7 @@
   }; 
  
   home-manager.backupFileExtension = "backup";
-  # home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
   programs.fuse.userAllowOther = true;
 

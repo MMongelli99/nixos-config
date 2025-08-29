@@ -6,7 +6,7 @@
     ./ripgrep.nix
     ./fzf.nix
     ./kitty.nix
-    # ./neovim
+    ./neovim
     ./firefox.nix
   ];
 }

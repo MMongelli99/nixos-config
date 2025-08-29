@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  packages = let
+  home.packages = let
     customNeovim =
       (inputs.nvf.lib.neovimConfiguration {
         inherit pkgs;
