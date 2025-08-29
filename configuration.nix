@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
 
   nix.settings = {
     experimental-features = [
@@ -24,7 +25,7 @@
     };
 
     openssh.enable = true;
-    
+
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };

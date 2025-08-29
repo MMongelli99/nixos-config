@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
 
   imports = [ inputs.disko.nixosModules.disko ];
 
@@ -66,8 +67,8 @@
             mountpoint = "/";
             options."com.sun:auto-snapshot" = "false";
             postCreateHook = ''
-	      zfs list -t snapshot -H -o name | grep -E '^zroot/local/root@blank$' || zfs snapshot zroot/local/root@blank
-	    '';
+              	      zfs list -t snapshot -H -o name | grep -E '^zroot/local/root@blank$' || zfs snapshot zroot/local/root@blank
+              	    '';
           };
           "safe" = {
             type = "zfs_fs";
