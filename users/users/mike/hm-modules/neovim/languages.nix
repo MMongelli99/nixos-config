@@ -11,7 +11,10 @@
       enableFormat = true;
       enableTreesitter = true;
 
-      nix.enable = true;
+      nix = {
+        enable = true;
+        format.type = "nixfmt";
+      };
       ts.enable = true;
       html = {
         enable = true;
