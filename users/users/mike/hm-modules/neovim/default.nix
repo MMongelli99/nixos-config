@@ -4,6 +4,8 @@
   ...
 }:
 {
+  home.persistence."/persist/home/mike".directories = [ ".local/state/nvf/undo" ];
+
   home.packages =
     let
       customNeovim =

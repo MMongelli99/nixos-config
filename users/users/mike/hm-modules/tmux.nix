@@ -4,6 +4,7 @@
   ...
 }:
 {
+  home.persistence."/persist/home/mike".directories = [ ".tmux/resurrect" ];
   programs.tmux =
     let
       tmuxConfFile = "${config.xdg.configHome}/tmux/tmux.conf";
