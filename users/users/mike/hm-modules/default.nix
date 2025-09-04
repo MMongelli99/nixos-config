@@ -8,6 +8,7 @@
     ./kitty.nix
     ./neovim
     ./tmux.nix
+    ./direnv.nix
     ./starship.nix
     ./firefox.nix
   ];
