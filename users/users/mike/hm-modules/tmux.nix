@@ -49,7 +49,7 @@
         set -g status-right-length 80
 
         set -g status-interval 1
-        set -g status-right '#H | #{battery_percentage}% #{battery_remain} | %Y-%m-%dT%H:%M:%S'
+        set -g status-right '#H | #{battery_percentage} #{battery_remain} | %Y-%m-%dT%H:%M:%S'
 
         bind r source-file "${tmuxConfFile}" \; display-message "tmux config reloaded"
 
