@@ -1,6 +1,9 @@
 { pkgs, config, ... }:
 {
 
+  time.timeZone = "Europe/Zurich";
+
+  nix.channel.enable = false;
   nix.settings = {
     experimental-features = [
       "nix-command"
