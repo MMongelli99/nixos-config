@@ -3,6 +3,7 @@
     ./packages.nix
     ./bash.nix
     ./git.nix
+    ./gh.nix
     ./ripgrep.nix
     ./fzf.nix
     ./kitty.nix
