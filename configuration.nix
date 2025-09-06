@@ -1,15 +1,20 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
 
   time.timeZone = "Europe/Zurich";
 
-  nix.channel.enable = false;
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-      "pipe-operators"
-    ];
+  nix = {
+
+    channel.enable = false;
+
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "pipe-operators"
+      ];
+    };
+
   };
 
   boot = {
@@ -22,6 +27,7 @@
   networking.hostId = "6f728562";
 
   services = {
+
     zfs.autoSnapshot = {
       enable = true;
       flags = "-k -p --utc";
@@ -31,16 +37,26 @@
 
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+
+    tlp.settings = {
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      START_CHARGE_THRESH_BAT0 = 40;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
+
   };
 
   environment = {
+
     variables = {
       EDITOR = "nvim";
     };
+
     systemPackages = with pkgs; [
       neovim
       git
     ];
+
   };
 
   system.stateVersion = "24.11";
