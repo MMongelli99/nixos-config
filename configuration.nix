@@ -52,12 +52,6 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
 
-    tlp.settings = {
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-    };
-
   };
 
   environment = {
