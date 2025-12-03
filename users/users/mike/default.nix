@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 {
 
   imports = [
@@ -15,7 +19,7 @@
   };
 
   home-manager.backupFileExtension = "backup";
-  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.extraSpecialArgs = { inherit inputs pkgs; };
 
   programs.fuse.userAllowOther = true;
 
@@ -54,15 +58,11 @@
 
       file = { };
 
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
+      sessionVariables.EDITOR = "nvim";
 
       stateVersion = "24.11";
     };
 
-    programs = {
-      home-manager.enable = true;
-    };
+    programs.home-manager.enable = true;
   };
 }

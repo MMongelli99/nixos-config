@@ -4,7 +4,7 @@
       enable = true;
       name = "github";
       style = "dark";
-      transparent = false;
+      transparent = true;
     };
     options = {
       number = true;

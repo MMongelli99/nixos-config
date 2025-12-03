@@ -12,5 +12,6 @@
     ./direnv.nix
     ./starship.nix
     ./firefox.nix
+    ./claude.nix
   ];
 }

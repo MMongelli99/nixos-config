@@ -21,6 +21,7 @@
                 ./clipboard.nix
               ];
               vim = {
+                autocomplete.blink-cmp.enable = true;
                 undoFile.enable = true;
                 navigation.harpoon = {
                   enable = true;
