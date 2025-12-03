@@ -1,7 +1,14 @@
 { pkgs, ... }:
 {
 
-  time.timeZone = "Europe/Zurich";
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "libsoup-2.74.3"
+    ];
+  };
+
+  time.timeZone = "America/New_York";
 
   nix = {
 
