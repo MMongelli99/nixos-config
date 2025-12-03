@@ -9,5 +9,11 @@
         sha256 = "sha256-3wG3M4Qep7MYjktzX9u8d0iDWa17FSXYnObSoTG2I/o=";
       };
     in
-    [ sf-mono ];
+    [
+      sf-mono # SF Mono
+    ]
+    ++ (with pkgs; [
+      mononoki # mononoki
+      # Terminus TTF
+    ]);
 }
