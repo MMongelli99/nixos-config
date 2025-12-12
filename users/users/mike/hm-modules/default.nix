@@ -13,5 +13,7 @@
     ./starship.nix
     ./firefox.nix
     ./claude.nix
+    ./google-chrome.nix
+    ./ssh.nix
   ];
 }

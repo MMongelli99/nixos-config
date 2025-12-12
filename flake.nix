@@ -23,9 +23,13 @@
           ./fonts.nix
           ./users
           ./power.nix
+          # ./remote-desktop.nix
 
-          ./shares.nix
-          ./fileshares
+          # ./shares.nix
+          # ./fileshares
+
+          # LIMS application configuration
+          # ./lims.nix
         ];
       };
       # templates = import ./flake-templates.nix { };

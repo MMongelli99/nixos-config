@@ -58,7 +58,10 @@
 
       file = { };
 
-      sessionVariables.EDITOR = "nvim";
+      sessionVariables = {
+        EDITOR = "nvim";
+        TERM = "screen-256color";
+      };
 
       stateVersion = "24.11";
     };

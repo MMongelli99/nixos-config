@@ -1,9 +1,12 @@
-_: {
+{
   # doesnt seem to be effective
   services.tlp = {
     settings = {
+      # use powersaver mode on battery to extend battery life
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      # start charging when battery drops to 40%
       START_CHARGE_THRESH_BAT0 = 40;
+      # stop chargin when battery reaches 80% to extend battery life
       STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
@@ -14,7 +17,7 @@ _: {
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
   '';
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.settings-daemon.plugins.power]
     sleep-interactive-ac-timeout=0
     sleep-interactive-battery-timeout=0
