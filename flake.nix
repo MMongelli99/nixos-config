@@ -25,6 +25,7 @@
           ./power.nix
           ./vpn.nix
           ./bash.nix
+          ./desktop.nix
           # ./remote-desktop.nix
 
           # ./shares.nix
