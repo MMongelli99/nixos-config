@@ -18,7 +18,7 @@
     initialPassword = "mike";
   };
 
-  home-manager.backupFileExtension = "backup";
+  home-manager.backupFileExtension = "hm-clobber";
   home-manager.extraSpecialArgs = { inherit inputs pkgs; };
 
   programs.fuse.userAllowOther = true;

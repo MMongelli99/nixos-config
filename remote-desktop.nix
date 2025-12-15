@@ -1,11 +1,8 @@
+{ pkgs, ... }:
 {
   services.xrdp = {
     enable = true;
     openFirewall = true;
-  };
-
-  services.xrdp = {
-    # to replace with KDE session manager
-    defaultWindowManager = "gnome-session";
+    defaultWindowManager = "${pkgs.gnome-session}/bin/gnome-session";
   };
 }

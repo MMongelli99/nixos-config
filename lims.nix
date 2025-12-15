@@ -6,7 +6,10 @@
 
 {
   # Enable networking
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   # ACME (Let's Encrypt) SSL configuration
   security.acme = {
@@ -17,12 +20,14 @@
         domain = "lims.csanalytical.us";
         dnsProvider = null; # Using HTTP challenge
         webroot = "/var/lib/acme/acme-challenge";
+        group = "wwwrun";
       };
       "portal.csanalytical.com" = {
         domain = "portal.csanalytical.com";
         extraDomainNames = [ "www.portal.csanalytical.com" ];
         dnsProvider = null; # Using HTTP challenge
         webroot = "/var/lib/acme/acme-challenge";
+        group = "wwwrun";
       };
     };
   };
@@ -31,11 +36,11 @@
   services.httpd = {
     enable = true;
     adminAddr = "webmaster@csanalytical.com";
-    
+
     # Enable required modules
-    enableModules = [
+    extraModules = [
       "proxy"
-      "proxy_http" 
+      "proxy_http"
       "proxy_balancer"
       "proxy_connect"
       "proxy_html"
@@ -68,15 +73,15 @@
       MaxKeepAliveRequests 100
       KeepAliveTimeout 5
       HostnameLookups Off
-      
+
       # Log formats
       LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
       LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
-      
+
       # Security headers
       Header always set X-Frame-Options DENY
       Header always set X-Content-Type-Options nosniff
-      
+
       # Static files directory permissions
       <Directory "/srv/CSAnalyticalLIMS/static">
         Options Indexes FollowSymLinks
@@ -89,14 +94,13 @@
     virtualHosts = {
       # LIMS internal access (HTTPS)
       "lims.csanalytical.us" = {
-        serverName = "lims.csanalytical.us";
         serverAliases = [ "lims.csanalytical.us" ];
         documentRoot = "/var/www/lims.csanalytical.com";
-        
+
         # Force HTTPS
         forceSSL = true;
         useACMEHost = "lims.csanalytical.us";
-        
+
         # Proxy to Gunicorn backend
         locations."/" = {
           proxyPass = "http://127.0.0.1:8080/";
@@ -105,12 +109,12 @@
             ProxyPassReverse http://127.0.0.1:8080/
           '';
         };
-        
+
         # Static files alias
         locations."/static" = {
           alias = "/srv/CSAnalyticalLIMS/static";
         };
-        
+
         # Access control - local network only
         extraConfig = ''
           <Location />
@@ -124,8 +128,12 @@
 
       # LIMS HTTP to HTTPS redirect
       "lims.csanalytical.us-http" = {
-        serverName = "lims.csanalytical.us";
-        listen = [ { ip = "*"; port = 80; } ];
+        listen = [
+          {
+            ip = "*";
+            port = 80;
+          }
+        ];
         extraConfig = ''
           RewriteEngine on
           RewriteCond %{SERVER_NAME} =lims.csanalytical.us
@@ -133,16 +141,15 @@
         '';
       };
 
-      # Portal external access (HTTPS) 
+      # Portal external access (HTTPS)
       "portal.csanalytical.com" = {
-        serverName = "portal.csanalytical.com";
         serverAliases = [ "www.portal.csanalytical.com" ];
         documentRoot = "/var/www/portal.csanalytical.com";
-        
+
         # Force HTTPS
         forceSSL = true;
         useACMEHost = "portal.csanalytical.com";
-        
+
         # Proxy to same Gunicorn backend
         locations."/" = {
           proxyPass = "http://127.0.0.1:8080/";
@@ -151,7 +158,7 @@
             ProxyPassReverse http://127.0.0.1:8080/
           '';
         };
-        
+
         # Static files alias
         locations."/static" = {
           alias = "/srv/CSAnalyticalLIMS/static";
@@ -160,9 +167,13 @@
 
       # Portal HTTP to HTTPS redirect
       "portal.csanalytical.com-http" = {
-        serverName = "portal.csanalytical.com";
         serverAliases = [ "www.portal.csanalytical.com" ];
-        listen = [ { ip = "*"; port = 80; } ];
+        listen = [
+          {
+            ip = "*";
+            port = 80;
+          }
+        ];
         extraConfig = ''
           RewriteEngine on
           RewriteCond %{SERVER_NAME} =www.portal.csanalytical.com [OR]
@@ -178,7 +189,7 @@
     description = "LIMS Gunicorn Application Server";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
-    
+
     serviceConfig = {
       Type = "simple";
       User = "lims";
@@ -186,9 +197,9 @@
       WorkingDirectory = "/srv/CSAnalyticalLIMS";
       Environment = [
         "LIMS_DEPLOYMENT_MODE=PRODUCTION"
-        "PATH=/srv/CSAnalyticalLIMS/venv/bin"
+        "PATH=/srv/CSAnalyticalLIMS/.devenv/state/venv/bin"
       ];
-      ExecStart = "/srv/CSAnalyticalLIMS/venv/bin/gunicorn -c /srv/CSAnalyticalLIMS/gunicorn.conf.py -b 0.0.0.0:8080 wsgi:app";
+      ExecStart = "/srv/CSAnalyticalLIMS/.devenv/state/venv/bin/gunicorn -c /srv/CSAnalyticalLIMS/gunicorn.conf.py -b 0.0.0.0:8080 wsgi:app";
       Restart = "on-failure";
       RestartSec = 5;
     };
@@ -200,18 +211,18 @@
     group = "lims";
     home = "/srv/CSAnalyticalLIMS";
   };
-  
-  users.groups.lims = {};
+
+  users.groups.lims = { };
 
   # LIMS-specific impermanence configuration
   environment.persistence."/persist" = {
     directories = [
       # LIMS application and data
       "/srv/CSAnalyticalLIMS"
-      
-      # Web content directories  
+
+      # Web content directories
       "/var/www"
-      
+
       # SSL certificates and ACME data
       "/var/lib/acme"
       "/etc/letsencrypt"
@@ -226,3 +237,4 @@
     "d /var/lib/acme/acme-challenge 0755 acme acme -"
   ];
 }
+

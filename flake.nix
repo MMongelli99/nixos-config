@@ -23,6 +23,8 @@
           ./fonts.nix
           ./users
           ./power.nix
+          ./vpn.nix
+          ./bash.nix
           # ./remote-desktop.nix
 
           # ./shares.nix

@@ -36,7 +36,7 @@ in
         extraConfig = ''
           # Auto-restore sessions on tmux start
           set -g @continuum-restore 'on'
-          # Auto-save sessions every N minutes (works with status-right polling)
+          # Auto-save sessions every N minutes
           set -g @continuum-save-interval '1' # minutes
         '';
       }
@@ -52,12 +52,12 @@ in
     ];
     extraConfig = ''
       set -g mouse on
-      set -g status-left-length 30
+      set -g status-left-length 100
       set -g status-right-length 80
 
       set -g status-interval 1
-      # Continuum auto-save: Script executes every status refresh (1s) via #() but only actually saves when interval elapsed
-      set -g status-right '#(${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/scripts/continuum_save.sh)#H | #{battery_percentage} #{battery_remain} | %Y-%m-%dT%H:%M:%S'
+      # Move custom elements to status-left so continuum can control status-right
+      set -g status-left '[#S] #H | #{battery_percentage} #{battery_remain} | %Y-%m-%dT%H:%M:%S | '
 
       bind r source-file "${tmuxConfFile}" \; display-message "tmux config reloaded"
 
