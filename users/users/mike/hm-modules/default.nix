@@ -15,5 +15,6 @@
     ./claude.nix
     ./google-chrome.nix
     ./ssh.nix
+    ./niri.nix
   ];
 }

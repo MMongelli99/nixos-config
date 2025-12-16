@@ -62,6 +62,7 @@
     systemPackages = with pkgs; [
       neovim
       git
+      networkmanager
     ];
 
   };

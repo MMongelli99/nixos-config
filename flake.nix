@@ -9,6 +9,8 @@
     };
     nvf.url = "github:notashelf/nvf";
     worm.url = "path:/home/mike/Documents/worm";
+    wrappers.url = "github:lassulus/wrappers";
+    # determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
   outputs =
     { nixpkgs, ... }@inputs:
@@ -16,6 +18,7 @@
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
+          # inputs.determinate.nixosModules.default
           ./configuration.nix
           ./hardware-configuration.nix
           ./disko.nix
@@ -25,7 +28,8 @@
           ./power.nix
           ./vpn.nix
           ./bash.nix
-          ./desktop.nix
+          ./niri.nix
+          # ./desktop.nix
           # ./remote-desktop.nix
 
           # ./shares.nix
