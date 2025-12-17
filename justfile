@@ -9,20 +9,40 @@
 # activate current configuration
 @test:
     sudo echo 'Rebuilding...'
-    sudo unbuffer nixos-rebuild test --flake=. |& nom && exec $SHELL
+    sudo unbuffer nixos-rebuild test --flake=. && exec $SHELL
 
 # [arg('label', pattern='[^\s]+')]
 # create git commit and add nixos generation
 add label comment:
     #! /usr/bin/env bash
     set -ueo pipefail
-    if git diff --quiet --exit-code; then
-        git commit -m 'nixos "{{label}}": {{comment}}'
-        sudo echo 'Rebuilding...'
-        NIXOS_LABEL='{{label}}' sudo --preserve-env=NIXOS_LABEL unbuffer nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
-    else
-        echo -e "\033[33mPlease stage all changes before adding the configuration:\033[0m"
+    
+    # Check for unstaged changes (modified tracked files + untracked files)
+    if ! git diff --quiet --exit-code || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        echo -e '\033[33mYou have unstaged changes:\033[0m'
         git status -s
+        echo
+        read -p "Stage all changes? [y/N]: " yn
+        case "$yn" in
+            y*)
+                git add .
+                echo
+                ;;
+            *) 
+                exit
+                ;;
+        esac
+    fi
+    
+    # Check for staged changes
+    if ! git diff --cached --quiet --exit-code; then
+        git commit -m 'nixos "{{label}}": {{comment}}'
+        echo 'Building configuration "{{label}}"...'
+        sudo -v
+        NIXOS_LABEL='{{label}}' sudo --preserve-env=NIXOS_LABEL nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
+    else
+        echo "No git changes found, not adding generation"
+        exit
     fi
 
 # [arg('n', pattern='\d+')]
