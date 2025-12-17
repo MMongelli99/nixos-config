@@ -36,7 +36,9 @@ add label comment:
     
     # Check for staged changes
     if ! git diff --cached --quiet --exit-code; then
+        echo -e '\033[33mCommitting changes:\033[0m'
         git commit -m 'nixos "{{label}}": {{comment}}'
+        echo
         echo 'Building configuration "{{label}}"...'
         sudo -v
         NIXOS_LABEL='{{label}}' sudo --preserve-env=NIXOS_LABEL nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
