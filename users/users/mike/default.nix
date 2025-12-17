@@ -51,7 +51,6 @@
         ];
         files = [
           ".screenrc"
-          "justfile"
         ];
         allowOther = true;
       };
