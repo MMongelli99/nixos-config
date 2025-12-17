@@ -13,15 +13,17 @@
 
 # [arg('label', pattern='[^\s]+')]
 # create git commit and add nixos generation
-add label comment:
+add comment:
     #! /usr/bin/env bash
     set -ueo pipefail
     
     # Check for unstaged changes (modified tracked files + untracked files)
     if ! git diff --quiet --exit-code || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        
         echo -e '\033[33mYou have unstaged changes:\033[0m'
         git status -s
         echo
+        
         read -p "Stage all changes? [y/N]: " yn
         case "$yn" in
             y*)
@@ -32,19 +34,30 @@ add label comment:
                 exit
                 ;;
         esac
+    
     fi
+
+    echo -e '\033[33mAuthorize creation of git commit + nixos generation pair...\033[0m'
+    sudo -v
+    echo
     
     # Check for staged changes
     if ! git diff --cached --quiet --exit-code; then
+        
         echo -e '\033[33mCommitting changes:\033[0m'
-        git commit -m 'nixos "{{label}}": {{comment}}'
+        git commit -m '{{comment}}' || exit
         echo
-        echo 'Building configuration "{{label}}"...'
-        sudo -v
-        NIXOS_LABEL='{{label}}' sudo --preserve-env=NIXOS_LABEL nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
+
+        NIXOS_LABEL="$(git rev-parse HEAD)" # current commit hash
+        
+        echo "Adding generation for commit $NIXOS_LABEL..."
+        sudo --preserve-env=NIXOS_LABEL nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
+    
     else
+        
         echo "No git changes found, not adding generation"
         exit
+    
     fi
 
 # [arg('n', pattern='\d+')]
