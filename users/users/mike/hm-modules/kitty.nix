@@ -6,7 +6,7 @@
 
   programs.kitty =
     let
-      fontSize = 16.0;
+      fontSize = 12.0;
     in
     {
       enable = true;
