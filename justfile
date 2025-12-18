@@ -20,10 +20,15 @@ add label='':
 
     label='{{label}}'
 
+    if ! [[ "$label" =~ ^[a-zA-Z0-9:_\.-]*$ ]]; then
+        echo -e "\033[33mInvalid label, may only contain letters, numbers, or the symbols \":\" \"_\" \".\" \"-\" \033[0m"
+        exit
+    fi
+
     # add generation with provided label
     if [ -n "$label" ]; then
-        echo -e "\033[33mAdding generation: $label\033[0m"
         sudo -v
+        echo -e "\033[33mAdding generation: $label\033[0m"
         NIXOS_LABEL="$label" sudo --preserve-env=NIXOS_LABEL \
           nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
         exit
