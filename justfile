@@ -6,54 +6,50 @@
 @default:
     just --list --unsorted
 
+
 # activate current configuration
 @test:
-    sudo echo 'Rebuilding...'
-    sudo unbuffer nixos-rebuild test --flake=. && exec $SHELL
+    sudo -v
+    sudo nixos-rebuild test --flake=. |& nom && exec $SHELL
 
-# [arg('label', pattern='[^\s]+')]
-# create git commit and add nixos generation
-add comment:
+
+# add nixos generation with current commit hash, or custom label if provided
+add label='':
     #! /usr/bin/env bash
     set -ueo pipefail
-    
-    echo -e '\033[33mYou have unstaged changes:\033[0m'
-    git status -s
-    echo
 
-    printf '\033[33mAll changes will be staged and committed. Proceed? [y/N]: \033[0m'
-    read yn
-    case "$yn" in
-        y*) sudo -v ;;
-        *) echo 'Exiting'; exit ;;
-    esac
-    echo
+    label='{{label}}'
 
-    # Stage all changes
-    git add .
-    
-    # Check for staged changes
-    if ! git diff --cached --quiet --exit-code; then
-        
-        echo -e '\033[33mCommitting changes:\033[0m'
-        git commit -m '{{comment}}' || exit
-        echo
-
-        NIXOS_LABEL="$(git rev-parse HEAD)" # current commit hash
-        
-        echo "Adding generation for commit $NIXOS_LABEL..."
-        sudo --preserve-env=NIXOS_LABEL nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
-    
-    else
-        
-        echo "No git changes found, not adding generation"
+    # add generation with provided label
+    if [ -n "$label" ]; then
+        echo -e "\033[33mAdding generation: $label\033[0m"
+        sudo -v
+        NIXOS_LABEL="$label" sudo --preserve-env=NIXOS_LABEL \
+          nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
         exit
-    
     fi
 
-# [arg('n', pattern='\d+')]
-# list previous `n` generations
-@list n='10':
-    nixos-rebuild list-generations | tee /dev/null | head -n "$(({{n}} + 1))"
-    echo '...'
+    # ensure repo is clean before proceeding
+    if [ -n "$(git status --porcelain)" ]; then
+        echo -e '\033[33mRepository must be clean, you have uncommitted changes:\033[0m'
+        git status -s
+        exit
+    fi
+
+    # add generation with current commit hash as label
+    just add "$(git rev-parse HEAD)"
+
+
+# list n generations
+list n='10':
+    #! /usr/bin/env bash
+    set -ueo pipefail
+
+    if [[ '{{n}}' =~ ^[0-9]+$ ]]; then
+        nixos-rebuild list-generations | tee /dev/null | head -n "$(({{n}} + 1))"
+        echo '...'
+    else
+        echo 'Invalid argument, "{{n}}" is not a number'
+        exit
+    fi
 
