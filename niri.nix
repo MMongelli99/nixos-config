@@ -1,17 +1,28 @@
-# { pkgs, inputs, ... }:
-# let
-#   inherit (inputs) wrappers;
-#   niri =
-#     (wrappers.wrapperModules.niri.apply {
-#       inherit pkgs;
-#     }).wrapper;
-# in
+{ pkgs, ... }:
 {
-
   services.displayManager.gdm.enable = true;
   programs.niri.enable = true;
 
-  # environment.systemPackages = [
-  #   niri
-  # ];
+  # Services GNOME auto-enabled that niri doesn't
+  networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.avahi.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true; # PulseAudio compatibility
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    fuzzel
+    brightnessctl # For brightness control
+    pavucontrol # Volume control GUI
+    swayosd # For popup notifications
+  ];
+
+  # Enable the SwayOSD service
+  services.udev.packages = [ pkgs.swayosd ];
 }

@@ -28,8 +28,8 @@
           ./power.nix
           ./vpn.nix
           ./bash.nix
-          # ./niri.nix
-          ./gnome.nix
+          ./niri.nix
+          # ./gnome.nix
           # ./remote-desktop.nix
 
           # ./shares.nix
