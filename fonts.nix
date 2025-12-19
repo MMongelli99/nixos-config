@@ -10,10 +10,11 @@
       };
     in
     [
-      sf-mono # SF Mono
+      sf-mono
     ]
     ++ (with pkgs; [
-      mononoki # mononoki
-      # Terminus TTF
+      mononoki
+      terminus_font_ttf
+      geist-font
     ]);
 }

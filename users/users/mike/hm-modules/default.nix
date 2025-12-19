@@ -16,5 +16,7 @@
     ./google-chrome.nix
     ./ssh.nix
     ./niri.nix
+    ./waybar.nix
+    ./remote-desktop.nix
   ];
 }
