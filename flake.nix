@@ -29,6 +29,8 @@
           ./vpn.nix
           ./bash.nix
           ./niri.nix
+          ./git
+
           # ./gnome.nix
 
           # ./shares.nix
