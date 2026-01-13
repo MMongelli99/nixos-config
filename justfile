@@ -3,6 +3,7 @@
 # set working-directory := "/home/mike/nixos-config"
 
 # list recipes
+[private]
 @default:
     just --list --unsorted
 
