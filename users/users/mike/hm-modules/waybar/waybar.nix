@@ -14,10 +14,10 @@
         gtk-layer-shell = true;
         height = 0;
         modules-left = [
-          "niri/workspaces"
-          "custom/divider"
-          "custom/weather"
-          "custom/divider"
+          # "niri/workspaces"
+          # "custom/divider"
+          # "custom/weather"
+          # "custom/divider"
           "cpu"
           "custom/divider"
           "memory"
@@ -46,7 +46,7 @@
         };
         cpu = {
           interval = 10;
-          format = "󰻠 {}%";
+          format = " 󰻠 {}%";
           max-length = 10;
           on-click = "";
         };
@@ -76,7 +76,8 @@
           format-disconnected = "󰖪 disconnected";
         };
         clock = {
-          format = " {:%I:%M %p   %m/%d} ";
+          interval = 1; # seconds
+          format = " {:%I:%M %p / %H:%M:%S   %Y-%m-%d} ";
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
