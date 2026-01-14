@@ -18,7 +18,7 @@
       };
       # see theme selections:
       # https://github.com/kovidgoyal/kitty-themes/tree/master/themes
-      themeFile = "gruvbox-dark";
+      themeFile = "Nord";
       settings = {
         "font_family" = "family='Terminus (TTF)' postscript_name=TerminusTTF";
         "bold_font" = "family='Terminus (TTF)' style=Bold";
