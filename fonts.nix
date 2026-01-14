@@ -14,7 +14,13 @@
     ]
     ++ (with pkgs; [
       mononoki
-      terminus_font_ttf
+      nerd-fonts.terminess-ttf
       geist-font
     ]);
+
+  fonts.fontconfig.defaultFonts = {
+    sansSerif = [ "Terminess Nerd Font" ];
+    serif = [ "Terminess Nerd Font" ];
+    monospace = [ "Terminess Nerd Font Mono" ];
+  };
 }

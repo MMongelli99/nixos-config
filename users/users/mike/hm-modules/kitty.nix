@@ -12,18 +12,18 @@
       enable = true;
       shellIntegration.enableBashIntegration = true;
       font = {
-        name = "Terminus (TTF)";
-        package = pkgs.terminus_font_ttf;
+        name = "Terminess Nerd Font Mono";
+        package = pkgs.nerd-fonts.terminess-ttf;
         size = fontSize;
       };
       # see theme selections:
       # https://github.com/kovidgoyal/kitty-themes/tree/master/themes
       themeFile = "Nord";
       settings = {
-        "font_family" = "family='Terminus (TTF)' postscript_name=TerminusTTF";
-        "bold_font" = "family='Terminus (TTF)' style=Bold";
-        "italic_font" = "auto";
-        "bold_italic_font" = "family='Terminus (TTF)' style=Bold-Italic";
+        "font_family" = "family='Terminess Nerd Font Mono'";
+        "bold_font" = "family='Terminess Nerd Font Mono' style=Bold";
+        "italic_font" = "family='Terminess Nerd Font Mono' style=Italic";
+        "bold_italic_font" = "family='Terminess Nerd Font Mono' style=Bold-Italic";
 
         "disable_ligatures" = "always";
 

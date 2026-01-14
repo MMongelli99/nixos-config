@@ -21,7 +21,7 @@
     brightnessctl # For brightness control
     pavucontrol # Volume control GUI
     swayosd # For popup notifications
-    waybar # Status bar
+    # waybar # Status bar
     swaylock # Lockscreen
   ];
 
