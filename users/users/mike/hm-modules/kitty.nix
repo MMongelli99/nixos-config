@@ -34,6 +34,9 @@
         "touch_scroll_multiplier" = "2.0";
 
         "window_padding_width" = "${lib.strings.floatToString fontSize}";
+
+        "background_opacity" = 0.70;
+        "background_blur" = 35; # blur radius, 0..64 recommended
       };
       extraConfig = ''
         modify_font underline_position 2
