@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   # Persist SSH directory across reboots (for NixOS with impermanence)
-  home.persistence."/persist/home/mike".directories = [ ".ssh" ];
+  # (.ssh dir impermanent in user's default impermanence config
+  # home.persistence."/persist".directories = [ ".ssh" ];
 
   /*
     Adding new connections:

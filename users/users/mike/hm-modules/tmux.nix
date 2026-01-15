@@ -9,7 +9,7 @@ let
   tmuxBatteryRepo = "${config.xdg.configHome}/tmux/tmux-battery";
 in
 {
-  home.persistence."/persist/home/mike".directories = [
+  home.persistence."/persist".directories = [
     ".tmux/resurrect"
     tmuxConfFile
     tmuxBatteryRepo

@@ -1,13 +1,10 @@
 {
-  pkgs,
   inputs,
   ...
 }:
 {
 
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-  ];
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   users.users."mike" = {
     isNormalUser = true;
@@ -18,24 +15,24 @@
     initialPassword = "mike";
   };
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
   home-manager.backupFileExtension = "hm-clobber";
-  home-manager.extraSpecialArgs = { inherit inputs pkgs; };
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
   programs.fuse.userAllowOther = true;
 
   home-manager.users."mike" = {
 
-    imports = [
-      inputs.impermanence.homeManagerModules.impermanence
-      ./hm-modules
-    ];
+    imports = [ ./hm-modules ];
 
     home = {
       username = "mike";
 
       homeDirectory = "/home/mike";
 
-      persistence."/persist/home/mike" = {
+      persistence."/persist" = {
         directories = [
           "Downloads"
           "Music"
@@ -52,7 +49,6 @@
         files = [
           ".screenrc"
         ];
-        allowOther = true;
       };
 
       file = { };

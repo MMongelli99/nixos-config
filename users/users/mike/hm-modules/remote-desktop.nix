@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home.persistence."/persist/home/mike" = {
+  home.persistence."/persist" = {
     directories = [ ".config/freerdp" ];
     files = [ ".config/connections.db" ];
   };

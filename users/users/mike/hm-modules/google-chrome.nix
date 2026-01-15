@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [ google-chrome ];
-  home.persistence."/persist/home/mike".directories = [
+  home.persistence."/persist".directories = [
     ".config/google-chrome/"
   ];
 }

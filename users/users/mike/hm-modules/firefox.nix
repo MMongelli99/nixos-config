@@ -1,5 +1,5 @@
 { pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [ firefox ];
-  home.persistence."/persist/home/mike".directories = [ ".mozilla" ];
+  home.persistence."/persist".directories = [ ".mozilla" ];
 }

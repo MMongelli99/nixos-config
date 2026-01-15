@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 {
-  home.persistence."/persist/home/mike".files = [
+  home.persistence."/persist".files = [
     ".config/kitty/kitty-icon.png"
   ];
 
