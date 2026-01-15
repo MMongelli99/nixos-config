@@ -260,6 +260,9 @@ spawn-at-startup "waybar"
 // Start SwayOSD server for volume/brightness popups
 spawn-at-startup "swayosd-server"
 
+// Set swww wallpaper
+spawn-at-startup "sh" "-c" "sleep 1 && swww img ~/.config/niri/wallpapers/nix-d-nord.jpg"
+
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
