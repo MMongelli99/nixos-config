@@ -30,6 +30,7 @@
           ./bash.nix
           ./niri.nix
           ./git
+          ./devenv.nix
 
           # ./gnome.nix
 
