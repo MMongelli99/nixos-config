@@ -23,6 +23,7 @@
     swayosd # For popup notifications
     # waybar # Status bar
     swaylock # Lockscreen
+    nautilus # File manager
   ];
 
   # Enable the SwayOSD service
