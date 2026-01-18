@@ -2,7 +2,7 @@
   vim = {
     theme = {
       enable = true;
-      name = "github";
+      name = "oxocarbon";
       style = "dark";
       transparent = true;
     };

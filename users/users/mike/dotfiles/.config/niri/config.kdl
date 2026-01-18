@@ -162,7 +162,7 @@ layout {
 
         // Color of the ring on the active monitor.
         // active-color "#7fc8ff40"
-        active-color "rgba(127, 200, 255, 0.25)"
+        active-color "rgba(127, 127, 127, 0.25)"
 
         // Color of the ring on inactive monitors.
         inactive-color "#505050"
@@ -262,7 +262,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "swayosd-server"
 
 // Set swww wallpaper
-spawn-at-startup "sh" "-c" "sleep 1 && swww img ~/.config/niri/wallpapers/nix-d-nord.jpg"
+spawn-at-startup "sh" "-c" "sleep 1 && swww img ~/.config/niri/wallpapers/thinknix-d.jpg"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.

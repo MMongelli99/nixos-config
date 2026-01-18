@@ -18,7 +18,7 @@
       };
       # see theme selections:
       # https://github.com/kovidgoyal/kitty-themes/tree/master/themes
-      themeFile = "Nord";
+      themeFile = "BlackMetal";
       settings = {
         "font_family" = "family='Terminess Nerd Font Mono'";
         "bold_font" = "family='Terminess Nerd Font Mono' style=Bold";
