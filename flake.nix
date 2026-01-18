@@ -31,6 +31,7 @@
           ./niri.nix
           ./git
           ./devenv.nix
+          ./plymouth
 
           # ./gnome.nix
 
