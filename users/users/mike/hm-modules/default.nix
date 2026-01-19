@@ -18,5 +18,6 @@
     ./niri.nix
     ./remote-desktop.nix
     ./waybar
+    ./obsidian.nix
   ];
 }
