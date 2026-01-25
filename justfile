@@ -32,6 +32,7 @@ add label='':
         echo -e "\033[33mAdding generation: $label\033[0m"
         NIXOS_LABEL="$label" sudo --preserve-env=NIXOS_LABEL \
           nixos-rebuild switch --flake=. --impure |& nom && exec $SHELL
+        
         exit
     fi
 
@@ -39,6 +40,7 @@ add label='':
     if [ -n "$(git status --porcelain)" ]; then
         echo -e '\033[33mRepository must be clean, you have uncommitted changes:\033[0m'
         git status -s
+        
         exit
     fi
 

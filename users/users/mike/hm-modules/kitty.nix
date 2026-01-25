@@ -11,14 +11,14 @@
     {
       enable = true;
       shellIntegration.enableBashIntegration = true;
-      font = {
-        name = "Terminess Nerd Font Mono";
-        package = pkgs.nerd-fonts.terminess-ttf;
-        size = fontSize;
-      };
+      # font = {
+      #   name = "Terminess Nerd Font Mono";
+      #   package = pkgs.nerd-fonts.terminess-ttf;
+      #   size = fontSize;
+      # };
       # see theme selections:
       # https://github.com/kovidgoyal/kitty-themes/tree/master/themes
-      themeFile = "BlackMetal";
+      # themeFile = "BlackMetal";
       settings = {
         "font_family" = "family='Terminess Nerd Font Mono'";
         "bold_font" = "family='Terminess Nerd Font Mono' style=Bold";
@@ -35,8 +35,8 @@
 
         "window_padding_width" = "${lib.strings.floatToString fontSize}";
 
-        "background_opacity" = 0.70;
-        "background_blur" = 35; # blur radius, 0..64 recommended
+        # "background_opacity" = 0.70;
+        # "background_blur" = 35; # blur radius, 0..64 recommended
       };
       extraConfig = ''
         modify_font underline_position 2

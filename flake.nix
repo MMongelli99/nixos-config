@@ -10,6 +10,10 @@
     nvf.url = "github:notashelf/nvf";
     worm.url = "path:/home/mike/Documents/worm";
     wrappers.url = "github:lassulus/wrappers";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
   outputs =
@@ -32,6 +36,8 @@
           ./git
           ./devenv.nix
           ./plymouth
+          ./stylix
+          ./neovim.nix
 
           # ./gnome.nix
 

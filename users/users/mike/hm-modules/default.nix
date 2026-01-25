@@ -10,7 +10,6 @@
     ./neovim
     ./tmux.nix
     ./direnv.nix
-    ./starship.nix
     ./firefox.nix
     ./claude.nix
     ./google-chrome.nix
@@ -18,6 +17,7 @@
     ./niri.nix
     ./remote-desktop.nix
     ./waybar
+    ./starship
     ./obsidian.nix
   ];
 }

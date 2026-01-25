@@ -1,11 +1,11 @@
 {
   vim = {
-    theme = {
-      enable = true;
-      name = "oxocarbon";
-      style = "dark";
-      transparent = true;
-    };
+    # theme = {
+    #   enable = true;
+    #   name = "oxocarbon";
+    #   style = "dark";
+    #   transparent = true;
+    # };
     options = {
       number = true;
       relativenumber = true;
