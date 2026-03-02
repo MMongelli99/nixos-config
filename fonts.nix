@@ -16,11 +16,6 @@
       mononoki
       nerd-fonts.terminess-ttf
       geist-font
+      nerd-fonts.monoid
     ]);
-
-  fonts.fontconfig.defaultFonts = {
-    sansSerif = [ "Terminess Nerd Font" ];
-    serif = [ "Terminess Nerd Font" ];
-    monospace = [ "Terminess Nerd Font Mono" ];
-  };
 }

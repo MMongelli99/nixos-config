@@ -49,10 +49,10 @@ in
         inherit (custom-themes."${cfg.theme}") base16Scheme image;
         opacity.terminal = 0.70;
         fonts = {
-          sizes.terminal = 12;
+          sizes.terminal = 10;
           monospace = {
-            name = "Terminess Nerd Font Mono";
-            package = pkgs.nerd-fonts.terminess-ttf;
+            name = "Hasklug Nerd Font Mono";
+            package = pkgs.nerd-fonts.hasklug;
           };
         };
         targets.nvf.transparentBackground = true;
