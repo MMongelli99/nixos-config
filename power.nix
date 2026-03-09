@@ -10,13 +10,6 @@
       STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
-  # lets try this
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.settings-daemon.plugins.power]
     sleep-interactive-ac-timeout=0
