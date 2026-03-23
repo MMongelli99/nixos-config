@@ -28,4 +28,15 @@
 
   # Enable the SwayOSD service
   services.udev.packages = [ pkgs.swayosd ];
+
+  # Enable mako notification daemon
+  systemd.user.services.mako = {
+    description = "Mako notification daemon";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.mako}/bin/mako";
+      Restart = "on-failure";
+    };
+  };
 }
