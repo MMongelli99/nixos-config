@@ -39,7 +39,7 @@ in
               image = ./wallpapers/thinknix-d.jpg;
             };
             "functional" = {
-              base16Scheme = getBase16Scheme "ashes";
+              base16Scheme = getBase16Scheme "ashes"; # "atelier-heath-light";
               image = ./wallpapers/nix-purple-wave.jpg;
             };
           };
@@ -49,14 +49,38 @@ in
         inherit (custom-themes."${cfg.theme}") base16Scheme image;
         opacity.terminal = 0.70;
         fonts = {
-          sizes.terminal = 10;
+          sizes.terminal = 12;
           monospace = {
-            name = "Hasklug Nerd Font Mono";
-            package = pkgs.nerd-fonts.hasklug;
+            name = "FiraCode Nerd Font Mono";
+            package = pkgs.nerd-fonts.fira-code;
           };
         };
         targets.nvf.transparentBackground = true;
         targets.plymouth.enable = false;
       };
+
+    fonts.fontconfig.localConf =
+      let
+        fontName = "FiraCode Nerd Font Mono";
+        features = [
+          "ss09" # enable bind operator ligature: >>=
+          "ss03" # use classic ampersand: &
+          "cv31" # use circular parens: ()
+          "ss02" # use GTE/LTE symbols with flat underbars: <= >=
+          "ss08" # disable triple-bar symbol for triple-eq: ===
+          "cv24" # use centered slash for not-eq: /=
+          "ss05" # use encircled ampersat: @
+        ];
+      in
+      ''
+        <match target="font">
+          <test name="family" compare="eq">
+            <string>${fontName}</string>
+          </test>
+          <edit name="fontfeatures" mode="append">
+            ${lib.concatMapStrings (s: "<string>${s}</string>") features}
+          </edit>
+        </match>
+      '';
   };
 }
