@@ -38,6 +38,7 @@
           ./plymouth
           ./stylix
           ./neovim.nix
+          ./virtualbox.nix
 
           # ./gnome.nix
 
